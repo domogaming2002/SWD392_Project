@@ -1,6 +1,6 @@
 ﻿namespace SWD392_Project.BussinessLayer.IRepository
 {
-    public interface ICategoryDrugManager
+    public interface ICategoryDrugRepository
     {
     }
 }

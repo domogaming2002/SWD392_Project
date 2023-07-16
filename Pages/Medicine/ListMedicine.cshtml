@@ -1,28 +1,43 @@
 ﻿@page
+@using SWD392_Project.Models
 @model SWD392_Project.Pages.Medicine.ListMedicineModel
 @{
     Layout = "_LayoutAdmin";
 }
-<!-- Button trigger modal create Semester -->
+<!-- Button trigger modal create Medicine -->
 <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#createGradeModal">
     Create Grade
 </button>
 
-<!-- Modal Create Semester -->
+<!-- Modal Create Medicine -->
 <div class="modal fade" id="createGradeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form asp-page="/Admin/GradePage/Grade" method="post">
+        <form asp-page-handler="CreateMedicine" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Semester</h5>
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Semester Name</p>
-                    <input type="text" name="gradeName" class="w-100" />
+                    <p>Medicine Name</p>
+                    <input type="text" name="medicineName" class="w-100" />
                     <br />
-                    <p>Start Date</p>
-                    <input type="number" name="percent" class="w-100"
+                    <p>Category</p>
+                    <select id="category" name="categoryId">
+                        <option value="">All</option>
+                        @foreach (CategoryMedicine category in Model.categoryMedicines)
+                        {
+                            <option value="@category.CategoryMedicineId">@category.CategoryMedicineName</option>
+                        }
+                    </select>
+                    <p>Quantity</p>
+                    <input type="number" name="medicineQuantity" class="w-100" />
+                    <br />
+                     <p>Unit</p>
+                    <input type="text" name="medicineUnit" class="w-100" />
+                    <br />
+                    <p>Description</p>
+                    <input type="text" name="medicineDescription" class="w-100" />
                     <br />
                 </div>
                 <div class="modal-footer">
