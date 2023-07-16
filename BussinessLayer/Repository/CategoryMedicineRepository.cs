@@ -18,5 +18,9 @@ namespace SWD392_Project.BussinessLayer.Repository
         {
             return manager.GetListMedicineCategory();
         }
+        public void AddCategory(CategoryMedicine category)
+        {
+            manager.AddCategory(category);
+        }
     }
 }
