@@ -1,0 +1,40 @@
+﻿@page
+@model SWD392_Project.Pages.Drugs.ListDrugModel
+@{
+}
+<div>
+    @if (Model.Drugs.Any(drug => drug.Quantity <= 15))
+    {
+        <p style="color: red">The following drugs are running low:</p>
+        <ul>
+            @foreach (var drug in Model.Drugs.Where(drug => drug.Quantity <= 15))
+            {
+                <li style="color: red">@drug.DrugName</li>
+            }
+        </ul>
+    }
+</div>
+<div>
+    <div style="width: 30%; float:left; padding:8px;">
+        <div>
+            <h1>List of Drug's Category</h1>
+        </div>
+        <div>
+            @foreach (var c in Model.Categories)
+            {
+                <div>
+                    <a href="">@c.CategoryDrugName</a>
+                </div>
+            }
+        </div>
+        <a href="/Drugs/AddDrugCategory">Add Drug's Category</a>
+
+    </div>
+    <div style="width: 60%; float:left; padding:8px;">
+        <div>
+            <h1>List of drug</h1>
+
+        </div>
+    </div>
+
+</div>

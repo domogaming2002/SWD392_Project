@@ -1,6 +1,10 @@
-﻿namespace SWD392_Project.BussinessLayer.IRepository
+﻿using SWD392_Project.Models;
+
+namespace SWD392_Project.BussinessLayer.IRepository
 {
-    public interface ICategoryDrugManager
+    public interface ICategoryDrugRepository
     {
+        public ICollection<CategoryDrug> GetCategories();
+        public void AddDrugCategory(CategoryDrug category);
     }
 }

@@ -1,0 +1,47 @@
+﻿@page
+@model SWD392_Project.Pages.Drugs.AddDrugModel
+@{
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Add new Drug</title>
+</head>
+<body>
+    <form method="post">
+        @*<input asp-for="Drug.DrugId" type="hidden" value="@Model.DrugId" />*@
+        <div class="form-group">
+            <label asp-for="Drug.DrugName">Drug name</label>
+            <input asp-for="Drug.DrugName" type="text" class="form-control" placeholder="name">
+        </div>
+        <div class="form-group">
+            <select id="category" name="categoryId">
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.CategoryDrugId">@category.CategoryDrugName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Drug.Quantity">Quantity</label>
+            <input asp-for="Drug.Quantity" class="form-control" placeholder="quantity">
+        </div>
+        <div class="form-group">
+            <label asp-for="Drug.Price">Price</label>
+            <input asp-for="Drug.Price" class="form-control" placeholder="price">
+        </div>
+        <div class="form-group">
+            <label asp-for="Drug.Unit">Unit</label>
+            <input asp-for="Drug.Unit" class="form-control" placeholder="unit">
+        </div>
+        <div class="form-group">
+            <label asp-for="Drug.Description">Description</label>
+            <input asp-for="Drug.Description" class="form-control" placeholder="description">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 150px"> Add</button>
+    </form>
+</body>
+</html>
