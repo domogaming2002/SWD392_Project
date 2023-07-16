@@ -1,4 +1,4 @@
-﻿using SWD392_Project.Models;
+using SWD392_Project.Models;
 
 namespace SWD392_Project.BussinessLayer.IRepository
 {

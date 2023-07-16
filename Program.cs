@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using SWD392_Project.BussinessLayer.IRepository;
-using SWD392_Project.BussinessLayer.Middleware;
 using SWD392_Project.BussinessLayer.Repository;
 using SWD392_Project.Models;
 
@@ -19,6 +18,8 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
+builder.Services.AddScoped(typeof(IMedicineRepository), typeof(MedicineRepository));
+builder.Services.AddScoped(typeof(ICategoryMedicineRepository), typeof(CategoryMedicineRepository));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

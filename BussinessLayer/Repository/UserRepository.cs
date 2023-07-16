@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SWD392_Project.BussinessLayer.IRepository;
 using SWD392_Project.DataLayer.Manager;
 using SWD392_Project.Helper;
