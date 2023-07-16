@@ -12,7 +12,6 @@ namespace SWD392_Project.Models
 
         public int CategoryDrugId { get; set; }
         public string CategoryDrugName { get; set; } = null!;
-        public bool IsDelete { get; set; }
 
         public virtual ICollection<Drug> Drugs { get; set; }
     }

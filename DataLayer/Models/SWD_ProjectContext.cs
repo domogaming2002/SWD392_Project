@@ -45,8 +45,6 @@ namespace SWD392_Project.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("categoryDrugName");
-
-                entity.Property(e => e.IsDelete).HasColumnName("isDelete");
             });
 
             modelBuilder.Entity<CategoryMedicine>(entity =>
@@ -63,8 +61,6 @@ namespace SWD392_Project.Models
                 entity.Property(e => e.Description)
                     .HasMaxLength(50)
                     .HasColumnName("description");
-
-                entity.Property(e => e.IsDelete).HasColumnName("isDelete");
             });
 
             modelBuilder.Entity<Drug>(entity =>
@@ -220,7 +216,10 @@ namespace SWD392_Project.Models
                     .HasMaxLength(100)
                     .HasColumnName("fullname");
 
-                entity.Property(e => e.IsActive).HasColumnName("isActive");
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasColumnName("isActive")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.IsDelete).HasColumnName("isDelete");
 

@@ -19,7 +19,7 @@ namespace SWD392_Project.Models
         public string PhoneNumber { get; set; } = null!;
         public int RoleId { get; set; }
         public bool IsDelete { get; set; }
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public virtual Role Role { get; set; } = null!;
         public virtual ICollection<Drug> Drugs { get; set; }
