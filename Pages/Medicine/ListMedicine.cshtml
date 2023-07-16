@@ -33,7 +33,7 @@
                     <p>Quantity</p>
                     <input type="number" name="medicineQuantity" class="w-100" />
                     <br />
-                     <p>Unit</p>
+                    <p>Unit</p>
                     <input type="text" name="medicineUnit" class="w-100" />
                     <br />
                     <p>Description</p>
@@ -48,3 +48,47 @@
         </form>
     </div>
 </div>
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#runOutMedicine">
+    Check medicine list about to run out
+</button>
+<!-- Modal Notify Run Out Medicine -->
+<div class="modal fade" id="runOutMedicine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Medicine List is About to Run Out</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Medicine Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Unit</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.runOutMedicines)
+                        {
+                            <tr>
+                                <td>@item.MedicineName</td>
+                                <td>@item.CategoryMedicine.CategoryMedicineName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Unit</td>
+                                <td>@item.Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

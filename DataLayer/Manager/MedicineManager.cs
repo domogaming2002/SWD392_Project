@@ -98,6 +98,7 @@ namespace SWD392_Project.DataLayer.Manager
         public List<Medicine> GetRunOutMedicine()
         {
             List<Medicine> runOutMedicines = _context.Medicines
+                                                    .Include(o => o.CategoryMedicine)
                                                     .Where(o => o.Quantity <= 15).ToList();
             return runOutMedicines;
         }
