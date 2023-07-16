@@ -12,12 +12,12 @@ namespace SWD392_Project.DataLayer.Manager
 
         public List<Medicine>? GetListMedicine()
         {
-            return _context.Medicines.Include(m => m.CategoryMedicine).Where(s => s.IsDelete == false).ToList();
+            return _context.Medicines.Include(m => m.CategoryMedicine).Include(m => m.CreatedByNavigation).Where(s => s.IsDelete == false).ToList();
         }
 
-        public Medicine? GetListMedicineById(int medicineId)
+        public Medicine? GetMedicineById(int medicineId)
         {
-            return _context.Medicines.Include(m => m.CategoryMedicine).FirstOrDefault(s => s.MedicineId == medicineId && s.IsDelete == false);
+            return _context.Medicines.Include(m => m.CategoryMedicine).Include(m => m.CreatedByNavigation).FirstOrDefault(s => s.MedicineId == medicineId && s.IsDelete == false);
         }
 
         public Boolean Create(Medicine medicine)
@@ -26,25 +26,21 @@ namespace SWD392_Project.DataLayer.Manager
             {
                 _context.Medicines.Add(medicine);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
             catch
             {
                 return false;
             }
-          
-           
+
+
         }
 
-        public Boolean Delelte(Medicine medicine)
+        public Boolean Delete(Medicine medicine)
         {
             try
             {
-                Medicine? medicine1 = GetListMedicineById(medicine.MedicineId);
+                Medicine? medicine1 = GetMedicineById(medicine.MedicineId);
                 medicine1.IsDelete = true;
                 _context.Medicines.Update(medicine1);
                 _context.SaveChanges();
@@ -64,19 +60,15 @@ namespace SWD392_Project.DataLayer.Manager
         {
             try
             {
-                Medicine? medicine1 = GetListMedicineById(medicine.MedicineId);
+                Medicine? medicine1 = GetMedicineById(medicine.MedicineId);
                 medicine1.MedicineName = medicine.MedicineName;
-                medicine1.MedicineName = medicine.MedicineName;
+                medicine1.Quantity = medicine.Quantity;
                 medicine1.CategoryMedicineId = medicine.CategoryMedicineId;
                 medicine1.Unit = medicine.Unit;
                 medicine1.Description = medicine.Description;
                 _context.Medicines.Update(medicine1);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
             catch (Exception e)
             {
@@ -86,13 +78,13 @@ namespace SWD392_Project.DataLayer.Manager
 
         public List<Medicine> GetListMedicineByName(string medicineName)
         {
-            return _context.Medicines.Include(m => m.CategoryMedicine)
+            return _context.Medicines.Include(m => m.CategoryMedicine).Include(m => m.CreatedByNavigation)
                 .Where(m => m.MedicineName.ToLower().Contains(medicineName.ToLower()) && m.IsDelete == false).ToList();
         }
 
         public List<Medicine> GetListMedicineByCategoryId(int cateId)
         {
-            return _context.Medicines.Include(m => m.CategoryMedicine)
+            return _context.Medicines.Include(m => m.CategoryMedicine).Include(m => m.CreatedByNavigation)
                 .Where(m => m.CategoryMedicineId == cateId && m.IsDelete == false).ToList();
         }
     }
