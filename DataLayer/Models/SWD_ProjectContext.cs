@@ -30,7 +30,6 @@ namespace SWD392_Project.Models
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("server=DANGNGOCLAN; database = SWD_Project;uid=sa;pwd=dangngoclan2002; Trusted_Connection=SSPI;Encrypt=false;TrustServerCertificate=true");
-
             }
         }
 

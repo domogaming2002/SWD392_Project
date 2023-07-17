@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SWD392_Project.BussinessLayer.IRepository;
 using SWD392_Project.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SWD392_Project.Pages.Drugs
 {
@@ -29,13 +30,22 @@ namespace SWD392_Project.Pages.Drugs
 
         public IActionResult OnPost(Models.Drug drug)
         {
-            //drug.CreatedBy = 1;
-            roleId = HttpContext.Session.GetInt32("roleId") ?? 0;
-            drug.CreatedBy = roleId;
-            drug.CategoryDrugId = CategoryId;
-            _drugRepository.AddDrug(drug);
-            Categories = _categoryRepository.GetCategories();
-            return RedirectToPage("/Drugs/ListDrug");
+            try
+            {
+                roleId = HttpContext.Session.GetInt32("roleId") ?? 0;
+                drug.CreatedBy = roleId;
+                drug.CategoryDrugId = CategoryId;
+                _drugRepository.AddDrug(drug);
+                Categories = _categoryRepository.GetCategories();
+                return RedirectToPage("/Drugs/ListDrug");
+            }
+            catch (Exception e)
+            {
+                Categories = _categoryRepository.GetCategories();
+                TempData["ErrorMessage"] = "An error occurred while adding the drug. Please check and try again later.";
+                return Page();
+            }
+
         }
     }
 }

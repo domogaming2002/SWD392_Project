@@ -1,0 +1,84 @@
+﻿@page
+@using SWD392_Project.Helper;
+@using SWD392_Project.Models;
+@model SWD392_Project.Pages.Drugs.ViewDrugModel
+@{
+    Layout = "_LayoutAdmin";
+}
+<form method="post" class="container">
+    <input hidden name="drugId" value="@Model.Drug.DrugId" />
+    <div class="row mb-3">
+        <label for="name" class="col-sm-2 col-form-label">Drug Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" name="name" value="@Model.Drug.DrugName">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-10">
+            <select class="form-select form-control" name="categoryId">
+                @foreach (CategoryDrug c in Model.Categories)
+                {
+                    @if (Model.Drug.CategoryDrugId == c.CategoryDrugId)
+                    {
+                        <option selected value="@c.CategoryDrugId">@c.CategoryDrugName</option>
+                    }
+                    else
+                    {
+                        <option value="@c.CategoryDrugId">@c.CategoryDrugName</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Unit</label>
+        <div class="col-sm-10">
+            <select class="form-select form-control" name="unit">
+                @foreach (string unit in Enum.GetNames(typeof(Units)))
+                {
+                    @if (Model.Drug.Unit == unit)
+                    {
+                        <option selected value="@unit">@unit</option>
+                    }
+                    else
+                    {
+                        <option value="@unit">@unit</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="quantity" name="quantity" value="@Model.Drug.Quantity">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="price" class="col-sm-2 col-form-label">Price</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="price" name="price" value="@Math.Round(Model.Drug.Price, 2)">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="description" name="description" value="@Model.Drug.Description">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-2 col-form-label">Create By</label>
+        <div class="col-sm-10">
+            <input readonly type="text" class="form-control"  value="@Model.Drug.CreatedByNavigation.Fullname">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-2 col-form-label">Create At</label>
+        <div class="col-sm-10">
+            <input readonly type="datetime" class="form-control" value="@Model.Drug.CreatedAt.ToString("dd/MM/yyyy")">
+        </div>
+    </div>
+    <button asp-page-handler="Update" type="submit" class="btn btn-dark" style="margin-right: 20px;">UPDATE</button>
+    <button asp-page-handler="Delete" type="submit" class="btn btn-danger">DELETE</button>
+</form>

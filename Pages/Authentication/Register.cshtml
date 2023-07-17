@@ -61,6 +61,15 @@
             <label class="form-label">Phone Number</label>
             <input type="text" class="form-control" name="phone" maxlength="10" required>
         </div>
+        <div class="form-group">
+            <label class="form-label">Role</label>
+            <select class="form-control" name="role" required>
+                <option value="2" selected>WarehouseStaff</option>
+                <option value="3">WarehouseManager</option>
+                <option value="4">Director</option>
+                <option value="5">Pharmacist</option>
+            </select>
+        </div>
         @if (TempData.ContainsKey("messageResponse"))
         {
             <div class="form-group">
