@@ -20,8 +20,16 @@ namespace SWD392_Project.Pages.Drugs
 
         public IActionResult OnPost(Models.CategoryDrug drugCategory)
         {
-            _categoryRepository.AddDrugCategory(drugCategory);
-            return RedirectToPage("/Drugs/ListDrug");
+            try
+            {
+                _categoryRepository.AddDrugCategory(drugCategory);
+                return RedirectToPage("/Drugs/ListDrug");
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = "An error occurred while adding the drug's category. Please check and try again later.";
+                return Page();
+            }
         }
     }
 }
