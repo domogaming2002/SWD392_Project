@@ -10,6 +10,7 @@ namespace SWD392_Project.Pages.Drugs
     {
         [BindProperty]
         public int CategoryId { get; set; }
+
         private ICategoryDrugRepository _categoryRepository;
         private IDrugRepository _drugRepository;
         public Models.Drug Drug { get; set; }
@@ -24,7 +25,6 @@ namespace SWD392_Project.Pages.Drugs
         }
         public void OnGet()
         {
-            //DrugId = _drugRepository.GetNextId();
             Categories = _categoryRepository.GetCategories();
         }
 

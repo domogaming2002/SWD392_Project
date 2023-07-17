@@ -69,7 +69,6 @@
         <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
     }
     <form method="post">
-        @*<input asp-for="Drug.DrugId" type="hidden" value="@Model.DrugId" />*@
         <div class="form-group">
             <label asp-for="Drug.DrugName">Drug name</label>
             <input asp-for="Drug.DrugName" type="text" class="form-control" placeholder="Name">

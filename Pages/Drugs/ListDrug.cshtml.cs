@@ -24,7 +24,5 @@ namespace SWD392_Project.Pages.Drugs
             Categories = _categoryRepository.GetCategories();
             Drugs = _drugRepository.GetDrugs();
         }
-
-        
     }
 }
