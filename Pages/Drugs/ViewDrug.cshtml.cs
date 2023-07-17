@@ -23,20 +23,32 @@ namespace SWD392_Project.Pages.Drugs
             Categories = _categoryRepository.GetCategories();
             Drug = _drugRepository.GetDrugById(drugId);
         }
-        public IActionResult OnPostUpdate(int drugId, string name, int categoryId, string unit, int quantity, double price, string description)
+        public void OnPostUpdate(int drugId, string name, int categoryId, string unit, int quantity, double price, string description)
         {
-            Drug d = new Drug();
-            d.DrugId = drugId;
-            d.DrugName = name;
-            d.CategoryDrugId = categoryId;
-            d.Unit = unit;
-            d.Quantity = quantity;
-            d.Price = (decimal)price;
-            d.Description = description;    
-            d.CreatedAt = DateTime.Now;
-            d.CreatedBy = (int)SessionHelper.GetIdFromSession(HttpContext.Session, "userId");
-            _drugRepository.UpdateDrug(d);
-            return Redirect("/Drugs/ListDrug");
+            try
+            {
+                Drug d = new Drug();
+                d.DrugId = drugId;
+                d.DrugName = name;
+                d.CategoryDrugId = categoryId;
+                d.Unit = unit;
+                d.Quantity = quantity;
+                d.Price = (decimal)price;
+                d.Description = description;
+                d.CreatedAt = DateTime.Now;
+                d.CreatedBy = (int)SessionHelper.GetIdFromSession(HttpContext.Session, "userId");
+                _drugRepository.UpdateDrug(d);
+                ViewData["updateMess"] = "Update successful!"; 
+            }
+            catch(Exception ex)
+            {
+                ViewData["updateMess"] = "Update fail!";
+            }
+            finally
+            {
+                Categories = _categoryRepository.GetCategories();
+                Drug = _drugRepository.GetDrugById(drugId);
+            }
         }
         public IActionResult OnPostDelete(int drugId)
         {

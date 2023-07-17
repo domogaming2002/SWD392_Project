@@ -110,33 +110,41 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Unit</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (Drug d in Model.Drugs)
-                        {
+                @if (Model.Drugs != null && Model.Drugs.Count > 0)
+                {
+                    <table class="table table-striped table-hover">
+                        <thead>
                             <tr>
-                                <td></td>
-                                <td>@d.DrugName</td>
-                                <td>@d.CategoryDrug.CategoryDrugName</td>
-                                <td>@d.Unit</td>
-                                <td>@d.Quantity</td>
-                                <td>@Math.Round(@d.Price, 2)</td>
-                                <td><a href="/Drugs/ViewDrug?drugId=@d.DrugId">View</a></td>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (Drug d in Model.Drugs)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>@d.DrugName</td>
+                                    <td>@d.CategoryDrug.CategoryDrugName</td>
+                                    <td>@d.Unit</td>
+                                    <td>@d.Quantity</td>
+                                    <td>@Math.Round(@d.Price, 2)</td>
+                                    <td><a href="/Drugs/ViewDrug?drugId=@d.DrugId">View</a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h5 class="text-danger">The drug list is empty</h5>
+                }
                 <a class="btn btn-dark btn-add-drug" href="/Drugs/AddDrug">Add Drug</a>
             </div>
         </div>
