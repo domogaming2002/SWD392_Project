@@ -16,5 +16,10 @@
         {
             session.Remove(key);
         }
+
+        internal static T GetObjectFromSession<T>(ISession session, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

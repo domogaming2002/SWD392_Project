@@ -26,7 +26,7 @@ namespace SWD392_Project.BussinessLayer.Repository
 
         public List<Medicine>? GetListMedicine()
         {
-            return manager.GetListMedicine();   
+            return manager.GetListMedicine();
         }
 
         public List<Medicine> GetListMedicineByCategoryId(int cateId)
@@ -47,6 +47,10 @@ namespace SWD392_Project.BussinessLayer.Repository
         public bool Update(Medicine medicine)
         {
             return manager.Update(medicine);
+        }
+        public List<Medicine> GetRunOutMedicine()
+        {
+            return manager.GetRunOutMedicine();
         }
     }
 }
