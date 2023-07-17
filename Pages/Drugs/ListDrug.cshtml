@@ -1,7 +1,76 @@
 ﻿@page
+@using SWD392_Project.Models;
 @model SWD392_Project.Pages.Drugs.ListDrugModel
 @{
+    Layout = "_LayoutAdmin";
 }
+<style>
+    .single {
+        padding: 30px 15px;
+        margin-top: 10px;
+        background: #fcfcfc;
+        border: 1px solid #f0f0f0;
+        height: 100vh;
+        position: relative;
+    }
+
+    .single h3.side-title {
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
+        font-size: 20px;
+        color: #333;
+        text-transform: uppercase;
+    }
+
+    .single h3.side-title:after {
+        content: '';
+        width: 60px;
+        height: 1px;
+        background: #ff173c;
+        display: block;
+        margin-top: 6px;
+    }
+
+    .single ul {
+        margin-bottom: 0;
+    }
+
+    .single li a {
+        color: #666;
+        font-size: 14px;
+        text-transform: uppercase;
+        border-bottom: 1px solid #f0f0f0;
+        line-height: 40px;
+        display: block;
+        text-decoration: none;
+    }
+
+    .single li a:hover {
+        color: #ff173c;
+    }
+
+    .single li:last-child a {
+        border-bottom: 0;
+    }
+
+    .btn-cus{
+        position: absolute;
+        top: 30px;
+        right: 8px;
+        font-size: 12px;
+    }
+
+    .table-wrapper{
+        position: relative;
+    }
+
+    .btn-add-drug{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+</style>
 <div>
     @if (Model.Drugs.Any(drug => drug.Quantity <= 15))
     {
@@ -14,27 +83,64 @@
         </ul>
     }
 </div>
-<div>
-    <div style="width: 30%; float:left; padding:8px;">
-        <div>
-            <h1>List of Drug's Category</h1>
-        </div>
-        <div>
-            @foreach (var c in Model.Categories)
-            {
-                <div>
-                    <a href="">@c.CategoryDrugName</a>
+<div class="row">
+    <div class="col-md-2">
+        <div class="row">
+            <div class="">
+                <!-- Category -->
+                <div class="single category">
+                    <h3 class="side-title">Category</h3>
+                    <ul class="list-unstyled">
+                        @foreach (var c in Model.Categories)
+                        {
+                            <li>@c.CategoryDrugName</li>
+                        }
+                    </ul>
+                    <a class="btn btn-dark btn-cus" href="/Drugs/AddDrugCategory">Add Category</a>
                 </div>
-            }
-        </div>
-        <a href="/Drugs/AddDrugCategory">Add Drug's Category</a>
-
-    </div>
-    <div style="width: 60%; float:left; padding:8px;">
-        <div>
-            <h1>List of drug</h1>
-            <a href="/Drugs/AddDrug">Add Drug</a>
+            </div>
         </div>
     </div>
-
+    <div class="col-md-10">
+        <div class="">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h2>Manage <b>Drug</b></h2>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Unit</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Drug d in Model.Drugs)
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@d.DrugName</td>
+                                <td>@d.CategoryDrug.CategoryDrugName</td>
+                                <td>@d.Unit</td>
+                                <td>@d.Quantity</td>
+                                <td>@Math.Round(@d.Price, 2)</td>
+                                <td><a href="/Drugs/ViewDrug?drugId=@d.DrugId">View</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a class="btn btn-dark btn-add-drug" href="/Drugs/AddDrug">Add Drug</a>
+            </div>
+        </div>
+    </div>
 </div>
+

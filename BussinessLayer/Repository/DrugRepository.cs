@@ -34,5 +34,17 @@ namespace SWD392_Project.BussinessLayer.Repository
         {
             return manager.IsLowStock(drugs);
         }
+        public Drug GetDrugById(int id)
+        {
+            return manager.GetDrugById(id);
+        }
+        public void DeleteDrug(int id)
+        {
+            manager.DeleteDrug(id);
+        }
+        public void UpdateDrug(Drug drug)
+        {
+            manager.UpdateDrug(drug);
+        }
     }
 }
