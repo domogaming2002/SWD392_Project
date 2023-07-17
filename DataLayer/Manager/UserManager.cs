@@ -9,7 +9,7 @@ namespace SWD392_Project.DataLayer.Manager
         { _context = context; }
         public User GetUser(string email, string password)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Email == email && x.Password == password);
+            var user = _context.Users.FirstOrDefault(x => x.Email.Equals(email) && x.Password.Equals(password));
             if (user == null)
             {
                 return null;

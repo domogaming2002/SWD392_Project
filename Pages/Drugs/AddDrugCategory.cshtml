@@ -1,0 +1,20 @@
+﻿@page
+@model SWD392_Project.Pages.Drugs.AddDrugCategoryModel
+@{
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Add new Drug</title>
+</head>
+<body>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="DrugCategory.CategoryDrugName">Drug name</label>
+            <input asp-for="DrugCategory.CategoryDrugName" type="text" class="form-control" placeholder="name">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 150px"> Add</button>
+    </form>
+</body>
+</html>

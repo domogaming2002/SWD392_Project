@@ -13,5 +13,25 @@ namespace SWD392_Project.DataLayer.Manager
         {
             return _context.CategoryMedicines.ToList();
         }
+        public void AddCategory(CategoryMedicine category)
+        {
+            if (!IsExisted(category))
+            {
+                _context.CategoryMedicines.Add(category);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("This category is already existed!");
+            }
+        }
+        public bool IsExisted(CategoryMedicine category)
+        {
+            CategoryMedicine existedCategory = _context.CategoryMedicines.FirstOrDefault(o => o.CategoryMedicineName.Equals(category.CategoryMedicineName));
+            if (existedCategory != null)
+                return true;
+            else
+                return false;
+        }
     }
 }

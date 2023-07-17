@@ -19,14 +19,14 @@ namespace SWD392_Project.BussinessLayer.Repository
             return manager.Create(medicine);
         }
 
-        public bool Delelte(Medicine medicine)
+        public bool Delete(Medicine medicine)
         {
-            return manager.Delelte(medicine);
+            return manager.Delete(medicine);
         }
 
         public List<Medicine>? GetListMedicine()
         {
-            return manager.GetListMedicine();   
+            return manager.GetListMedicine();
         }
 
         public List<Medicine> GetListMedicineByCategoryId(int cateId)
@@ -34,9 +34,9 @@ namespace SWD392_Project.BussinessLayer.Repository
             return manager.GetListMedicineByCategoryId(cateId);
         }
 
-        public Medicine? GetListMedicineById(int medicineId)
+        public Medicine? GetMedicineById(int medicineId)
         {
-            return manager.GetListMedicineById(medicineId);
+            return manager.GetMedicineById(medicineId);
         }
 
         public List<Medicine> GetListMedicineByName(string medicineName)
@@ -47,6 +47,10 @@ namespace SWD392_Project.BussinessLayer.Repository
         public bool Update(Medicine medicine)
         {
             return manager.Update(medicine);
+        }
+        public List<Medicine> GetRunOutMedicine()
+        {
+            return manager.GetRunOutMedicine();
         }
     }
 }
