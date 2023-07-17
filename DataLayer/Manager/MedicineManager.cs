@@ -87,7 +87,7 @@ namespace SWD392_Project.DataLayer.Manager
         {
             List<Medicine> runOutMedicines = _context.Medicines
                                                     .Include(o => o.CategoryMedicine)
-                                                    .Where(o => o.Quantity <= 15).ToList();
+                                                    .Where(o => o.Quantity <= 15 && o.IsDelete == false).ToList();
             return runOutMedicines;
         }
     }

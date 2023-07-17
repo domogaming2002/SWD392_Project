@@ -76,7 +76,7 @@
     {
         <p style="color: red">The following drugs are running low:</p>
         <ul>
-            @foreach (var drug in Model.Drugs.Where(drug => drug.Quantity <= 15))
+            @foreach (var drug in Model.Drugs.Where(drug => drug.Quantity <= 15 && drug.IsDelete == false))
             {
                 <li style="color: red">@drug.DrugName</li>
             }

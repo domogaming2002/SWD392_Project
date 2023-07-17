@@ -56,7 +56,7 @@ namespace SWD392_Project.DataLayer.Manager
         {
             try
             {
-                return _context.Drugs.ToList();
+                return _context.Drugs.Where(d => d.IsDelete == false).ToList();
             }
             catch (Exception e)
             {

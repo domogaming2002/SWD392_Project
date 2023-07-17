@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] FAP</title>
+    <title>@ViewData["Title"] SWD-G4-Project</title>
     @*<link rel="stylesheet" href="~/css/sketchy.css"/>*@
     <link rel="stylesheet" href="~/css/styles.css" />
 
@@ -22,42 +22,6 @@
 </head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" asp-page="/Admin/Index">Admin Site</a>
-        <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-            <i class="fas fa-bars"></i>
-        </button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user fa-fw"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li>
-                        <a class="dropdown-item" href="/change-password">Change Password</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li>
-                        <form method="post" asp-page="/Authentication/Login" asp-page-handler="Logout" id="form-submit-logout">
-                            <span class="dropdown-item logout-btn" onclick="handleLogOut()">Logout</span>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-        </ul>
     </nav>
     <div id="layoutSidenav">
         <!-- Sidebar -->
@@ -65,7 +29,7 @@
             <div class="row flex-nowrap">
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                      
+
                         <a asp-page="/Medicine/ListMedicine" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span class="fs-5 d-none d-sm-inline">Medicine</span>
                         </a>
@@ -85,19 +49,22 @@
                         <div class="dropdown pb-4">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                <span class="d-none d-sm-inline mx-1">loser</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                <li><a class="dropdown-item" href="#">New project...</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li>
-                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" href="/change-password">Change Password</a>
                                 </li>
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                <li>
+                                    <hr class="dropdown-divider" />
+                                </li>
+                                <li>
+                                    <form method="post" asp-page="/Authentication/Login" asp-page-handler="Logout" id="form-submit-logout">
+                                        <span class="dropdown-item logout-btn" onclick="handleLogOut()">Logout</span>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="col py-3">
