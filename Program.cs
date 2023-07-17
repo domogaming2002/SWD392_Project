@@ -22,6 +22,8 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
+builder.Services.AddScoped(typeof(IReportRepository), typeof(ReportRepository));
+
 builder.Services.AddScoped(typeof(IMedicineRepository), typeof(MedicineRepository));
 builder.Services.AddScoped(typeof(ICategoryMedicineRepository), typeof(CategoryMedicineRepository));
 var app = builder.Build();

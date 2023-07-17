@@ -7,7 +7,7 @@ namespace SWD392_Project.Models
     {
         public int ReportId { get; set; }
         public string ReportName { get; set; } = null!;
-        public DateTime Description { get; set; }
+        public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public int CreatedBy { get; set; }
         public bool IsDelete { get; set; }
