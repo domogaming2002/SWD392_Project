@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<SWD_ProjectContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnectString")));
+
+builder.Services.AddScoped(typeof(IDrugRepository), typeof(DrugRepository));
+builder.Services.AddScoped(typeof(ICategoryDrugRepository), typeof(CategoryDrugRepository));
 builder.Services.AddTransient<IUserRepository, UserRepository>()
     .AddDbContext<SWD_ProjectContext>(opt =>
     builder.Configuration.GetConnectionString("DataConnectString"));
