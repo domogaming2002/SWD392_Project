@@ -31,21 +31,26 @@ namespace SWD392_Project.Pages.MedicineCategory
             // get input "description" 
             string description = HttpContext.Request.Form["description"];
 
-            try
+            if (string.IsNullOrEmpty(medicineNameCategory) || string.IsNullOrEmpty(description))
             {
-                CategoryMedicine category = new CategoryMedicine();
-                category.CategoryMedicineName = medicineNameCategory;
-                category.Description = description;
-                categoryMedicineRepository.AddCategory(category);
+                TempData["messageResponse"] = "Add fail. Category name and description should not be empty";
+
             }
-            catch (Exception e)
+            else
             {
+                try
+                {
+                    CategoryMedicine category = new CategoryMedicine();
+                    category.CategoryMedicineName = medicineNameCategory;
+                    category.Description = description;
+                    categoryMedicineRepository.AddCategory(category);
+                }
+                catch (Exception e)
+                {
 
-                string ex = e.Message;
+                    TempData["messageResponse"] = e.Message;
+                }
             }
-
-            // TODO: Xử lý giá trị của hai trường input này
-
             return RedirectToPage();
         }
     }
