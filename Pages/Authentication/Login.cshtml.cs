@@ -34,5 +34,11 @@ namespace SWD392_Project.Pages.Authentication
                 return Redirect("/dashboard");
             }
         }
+
+        public IActionResult OnPostLogout()
+        {
+            SessionHelper.RemoveIdFromSession(HttpContext.Session, "userId");
+            return Redirect("/login");
+        }
     }
 }

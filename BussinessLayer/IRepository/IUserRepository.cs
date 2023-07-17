@@ -10,5 +10,6 @@ namespace SWD392_Project.BussinessLayer.IRepository
         public User GetUserById(int userId);
         public int AddUser(User user);
         public bool SendEmail();
+        public int ChangePassword(int userId, string newPassword);
     }
 }

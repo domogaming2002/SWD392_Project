@@ -34,5 +34,16 @@ namespace SWD392_Project.DataLayer.Manager
             _context.Users.Add(user);
             return _context.SaveChanges();
         }
+
+        public int ChangePassword(int userId, string newPassword)
+        {
+            var user = _context.Users.FirstOrDefault(o => o.Id == userId);
+            if (user != null)
+            {
+                user.Password = newPassword;
+                return _context.SaveChanges();
+            }
+            return 0;
+        }
     }
 }

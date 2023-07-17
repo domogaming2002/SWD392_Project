@@ -40,16 +40,15 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li>
-                        <a class="dropdown-item" href="#!">Settings</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#!">Activity Log</a>
+                        <a class="dropdown-item" href="/change-password">Change Password</a>
                     </li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#!">Logout</a>
+                        <form method="post" asp-page="/Authentication/Login" asp-page-handler="Logout" id="form-submit-logout">
+                            <span class="dropdown-item logout-btn" onclick="handleLogOut()">Logout</span>
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -146,4 +145,9 @@
         $('#' + modalID).modal('show');
     }
 
+    const form_submit_logout = document.querySelector('#form-submit-logout');
+
+    const handleLogOut = () => {
+        form_submit_logout.submit();
+    };
 </script>
