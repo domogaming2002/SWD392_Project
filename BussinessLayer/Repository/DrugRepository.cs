@@ -25,15 +25,6 @@ namespace SWD392_Project.BussinessLayer.Repository
             return manager.GetDrugs();
         }
 
-        public int GetNextId()
-        {
-            return manager.GetNextId();
-        }
-
-        public bool IsLowStock(List<Drug> drugs)
-        {
-            return manager.IsLowStock(drugs);
-        }
         public Drug GetDrugById(int id)
         {
             return manager.GetDrugById(id);

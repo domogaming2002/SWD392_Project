@@ -11,19 +11,6 @@ namespace SWD392_Project.DataLayer.Manager
             _context = context;
         }
 
-        public int GetNextId()
-        {
-            try
-            {
-                return _context.Drugs.OrderByDescending(x => x.DrugId).First().DrugId + 1;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
         public void AddDrug(Drug drug)
         {
             try
@@ -38,18 +25,6 @@ namespace SWD392_Project.DataLayer.Manager
                 Console.WriteLine(e);
                 throw;
             }
-        }
-
-        public bool IsLowStock(List<Drug> drugs)
-        {
-            foreach (Drug drug in drugs)
-            {
-                if (drug.Quantity <= 15)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         public ICollection<Drug> GetDrugs()
