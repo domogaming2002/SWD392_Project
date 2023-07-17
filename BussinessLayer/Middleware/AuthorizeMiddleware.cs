@@ -6,6 +6,7 @@ namespace SWD392_Project.BussinessLayer.Middleware
     {
         private readonly RequestDelegate _next;
         private const string ROUTE_LOGIN = "/login";
+        private const string ROUTE_REGISTER = "/register";
         private const string ROUTE_DASHBOARD = "/dashboard";
         private const string ROUTE_HOME = "/";
         private const string USERID_KEY = "userId";
@@ -21,8 +22,9 @@ namespace SWD392_Project.BussinessLayer.Middleware
             int? userId = Helper.SessionHelper.GetIdFromSession(context.Session, USERID_KEY);
             int? roleId = Helper.SessionHelper.GetIdFromSession(context.Session, ROLEID_KEY);
 
-            // check if not logged in and route is not /login => redirect to login
-            if (!userId.HasValue && !context.Request.Path.Equals(ROUTE_LOGIN, StringComparison.OrdinalIgnoreCase))
+            // check if not logged in and route is not /login or /register => redirect to login
+            if (!userId.HasValue && !context.Request.Path.Equals(ROUTE_LOGIN, StringComparison.OrdinalIgnoreCase)
+                && !context.Request.Path.Equals(ROUTE_REGISTER, StringComparison.OrdinalIgnoreCase))
             {
                 // No active session, redirect to login page
                 context.Response.Redirect(ROUTE_LOGIN);
