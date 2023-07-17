@@ -51,8 +51,6 @@
             <th>Description</th>
             <th>Created At</th>
             <th>Created By</th>
-            <th>Delete</th>
-            <th>Update</th>
         </tr>
     </thead>
     @foreach (Report item in Model.reports)
@@ -62,12 +60,6 @@
             <td>@item.Description</td>
             <td>@item.CreatedAt.ToString("dd/MM/yyyy")</td>
             <td>@item.CreatedByNavigation.Fullname</td>
-            <td>
-                <button type="button" class="btn btn-link btn-sm btn-rounded"
-                    onclick="openPopupDelete('@item.ReportId')">
-                    Delete
-                </button>
-            </td>
         </tr>
     }
 </table>

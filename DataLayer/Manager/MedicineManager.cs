@@ -17,7 +17,7 @@ namespace SWD392_Project.DataLayer.Manager
 
         public Medicine? GetMedicineById(int medicineId)
         {
-            return _context.Medicines.Include(m => m.CategoryMedicine).Include(m => m.CreatedByNavigation).FirstOrDefault(s => s.MedicineId == medicineId && s.IsDelete == false);
+            return _context.Medicines.Include(m => m.CategoryMedicine).Include(m => m.CreatedByNavigation).FirstOrDefault(s => s.MedicineId == medicineId);
         }
 
         public Boolean Create(Medicine medicine)
@@ -44,11 +44,7 @@ namespace SWD392_Project.DataLayer.Manager
                 medicine1.IsDelete = true;
                 _context.Medicines.Update(medicine1);
                 _context.SaveChanges();
-                if (_context.SaveChanges() > 0)
-                {
                     return true;
-                }
-                return false;
             }
             catch (Exception e)
             {
