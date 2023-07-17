@@ -14,6 +14,7 @@ namespace SWD392_Project.Pages.Drugs
         public Models.Drug Drug { get; set; }
         public ICollection<CategoryDrug> Categories { get; set; }
         public int DrugId { get; set; }
+        public int roleId { get; set; }
 
         public AddDrugModel(ICategoryDrugRepository categoryRepository, IDrugRepository drugRepository)
         {
@@ -28,7 +29,9 @@ namespace SWD392_Project.Pages.Drugs
 
         public IActionResult OnPost(Models.Drug drug)
         {
-            drug.CreatedBy = 1;
+            //drug.CreatedBy = 1;
+            roleId = HttpContext.Session.GetInt32("roleId") ?? 0;
+            drug.CreatedBy = roleId;
             drug.CategoryDrugId = CategoryId;
             _drugRepository.AddDrug(drug);
             Categories = _categoryRepository.GetCategories();
