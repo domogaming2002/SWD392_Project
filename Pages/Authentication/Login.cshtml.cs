@@ -31,7 +31,7 @@ namespace SWD392_Project.Pages.Authentication
                 // save userId and roleId to session
                 SessionHelper.SetIdToSession(HttpContext.Session, "userId", user.Id);
                 SessionHelper.SetIdToSession(HttpContext.Session, "roleId", user.RoleId);
-                return Redirect("/dashboard");
+                return Redirect("/Medicine/ListMedicine");
             }
         }
     }

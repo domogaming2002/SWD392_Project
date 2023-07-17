@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SWD392_Project.BussinessLayer.IRepository;
 using SWD392_Project.BussinessLayer.Repository;
+using SWD392_Project.Helper;
 using SWD392_Project.Models;
 
 namespace SWD392_Project.Pages.Medicine
@@ -21,8 +22,17 @@ namespace SWD392_Project.Pages.Medicine
             _categoryMedicine = categoryMedicineRepository;
             _userRepository = userRepository;
         }
-        public void OnGet()
+        public void OnGet(int categoryID)
         {
+            if (categoryID == 0)
+            {
+                medicines = _medicineRepository.GetListMedicine();
+            }
+            else
+            {
+                medicines = _medicineRepository.GetListMedicineByCategoryId(categoryID);
+
+            }
             GetData();
             GetRunOut();
         }
@@ -39,12 +49,29 @@ namespace SWD392_Project.Pages.Medicine
         {
             string medicineName = HttpContext.Request.Form["medicineName"];
 
+            if (string.IsNullOrEmpty(HttpContext.Request.Form["categoryId"]))
+            {
+                TempData["messageResponse"] = "Add fail";
+                return RedirectToPage();
+            }
             int categoryId = Int32.Parse(HttpContext.Request.Form["categoryId"]);
             int quantity = Int32.Parse(HttpContext.Request.Form["medicineQuantity"]);
             string unit = HttpContext.Request.Form["medicineUnit"];
             string description = HttpContext.Request.Form["medicineDescription"];
 
-            Models.User user = _userRepository.GetUser("dungdt@gmail.com", "123");
+            int? userId = SessionHelper.GetIdFromSession(HttpContext.Session, "userId");
+
+            if (string.IsNullOrEmpty(medicineName) || string.IsNullOrEmpty(unit) || string.IsNullOrEmpty(description))
+            {
+                TempData["messageResponse"] = "Add fail";
+                return RedirectToPage();
+            }
+            if (medicineName.Length > 50 || quantity < 0 || unit.Length > 50 || description.Length > 50 || categoryId == 0)
+            {
+                TempData["messageResponse"] = "Add fail";
+                return RedirectToPage();
+
+            }
 
             Models.Medicine medicine = new Models.Medicine();
             medicine.MedicineName = medicineName;
@@ -53,7 +80,8 @@ namespace SWD392_Project.Pages.Medicine
             medicine.Unit = unit;
             medicine.Description = description;
             medicine.CreatedAt = DateTime.Now;
-            medicine.CreatedBy = user.Id;
+            medicine.CreatedBy = userId.Value;
+
             try
             {
                 _medicineRepository.Create(medicine);
@@ -64,9 +92,67 @@ namespace SWD392_Project.Pages.Medicine
                 string ex = e.Message;
             }
 
-            // TODO: Xử lý giá trị của hai trường input này
-
             return RedirectToPage();
         }
+        public void OnPostUpdate(string medicineName, int categoryId, int medicineQuantity, string medicineUnit, string medicineDescription, int medicineId)
+        {
+
+            Models.Medicine medicine = _medicineRepository.GetMedicineById(medicineId);
+            if (medicine == null)
+            {
+                TempData["messageResponse"] = "Medicine Id not correct";
+                OnGet(0);
+                return;
+            }
+            if (string.IsNullOrEmpty(medicineName) || string.IsNullOrEmpty(medicineUnit) || string.IsNullOrEmpty(medicineDescription))
+            {
+                TempData["messageResponse"] = "Update fail";
+                OnGet(0);
+                return;
+            }
+            if (medicineName.Length > 50 || medicineQuantity < 0 || medicineUnit.Length > 50 || medicineDescription.Length > 50)
+            {
+                TempData["messageResponse"] = "Update fail";
+                OnGet(0);
+                return;
+            }
+            medicine = new Models.Medicine()
+            {
+                MedicineId = medicineId,
+                MedicineName = medicineName,
+                CategoryMedicineId = categoryId,
+                Quantity = medicineQuantity,
+                Unit = medicineUnit,
+                Description = medicineDescription,
+            };
+            _medicineRepository.Update(medicine);
+            if (!_medicineRepository.Update(medicine))
+            {
+                TempData["messageResponse"] = "Medicine Id not correct";
+                OnGet(0);
+                return;
+            }
+            OnGet(0);
+
+        }
+        public void OnPostDelete(int medicineId)
+        {
+            Models.Medicine medicine = _medicineRepository.GetMedicineById(medicineId);
+            if (medicine == null)
+            {
+                TempData["messageResponse"] = "Medicine Id not correct";
+                OnGet(0);
+                return;
+            }
+            _medicineRepository.Delete(medicine);
+            if (!_medicineRepository.Delete(medicine))
+            {
+                TempData["messageResponse"] = "Medicine Id not correct";
+                OnGet(0);
+                return;
+            }
+            OnGet(0);
+        }
+
     }
 }

@@ -6,7 +6,7 @@
 }
 <!-- Button trigger modal create Medicine -->
 <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#createGradeModal">
-    Create Grade
+    Add new medicine
 </button>
 
 <!-- Modal Create Medicine -->
@@ -90,5 +90,164 @@
         </div>
     </div>
 </div>
+<!--Table Medicine -->
+@if (TempData.ContainsKey("messageResponse"))
+{
+    <div class="form-group">
+        <p class="text-danger">@TempData["messageResponse"]</p>
+    </div>
+}
+
+<form method="get">
+    <select id="category" name="categoryId">
+        <option value="">All</option>
+        @foreach (CategoryMedicine category in Model.categoryMedicines)
+        {
+            <option value="@category.CategoryMedicineId">@category.CategoryMedicineName</option>
+        }
+    </select>
+    <button type="submit">Submit</button>
+</form>
+<table id="table" class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+
+        <tr>
+            <th>Medicine Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Created By</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    @foreach (Medicine item in Model.medicines)
+    {
+        <tr>
+            <td>@item.MedicineName</td>
+            <td>@item.CategoryMedicine.CategoryMedicineName</td>
+            <td>@item.Quantity</td>
+            <td>@item.Unit</td>
+            <td>@item.Description</td>
+            <td>@item.CreatedAt.ToString("dd/MM/yyyy")</td>
+            <td>@item.CreatedByNavigation.Fullname</td>
+            <td>
+                <button type="button" class="btn btn-link btn-sm btn-rounded"
+                    onclick="openPopupDelete('@item.MedicineId')">
+                    Delete
+                </button>
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-link btn-sm btn-rounded"
+                    onclick="openPopup('@item.MedicineName','@item.CategoryMedicineId','@item.Quantity'
+                    ,'@item.Unit','@item.Description','@item.MedicineId')">
+                    Update
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- Modal Update Medicine -->
+<div class="modal fade" id="updateMedicineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-page-handler="Update" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Semester</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('updateMedicineModal')"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Medicine Name</p>
+                    <input id="medicineNameUpdate" type="text" name="medicineName" class="w-100" />
+                    <br />
+                    <p>Category</p>
+                    <select id="categoryUpdate" name="categoryId">
+                        @foreach (CategoryMedicine category in Model.categoryMedicines)
+                        {
+                            <option value="@category.CategoryMedicineId">@category.CategoryMedicineName</option>
+                        }
+                    </select>
+                    <p>Quantity</p>
+                    <input id="medicineQuantityUpdate" type="number" name="medicineQuantity" class="w-100" />
+                    <br />
+                    <p>Unit</p>
+                    <input id="medicineUnitUpdate" type="text" name="medicineUnit" class="w-100" />
+                    <br />
+                    <p>Description</p>
+                    <input id="medicineDescriptionUpdate" type="text" name="medicineDescription" class="w-100" />
+                    <br />
+                    <input id="medicineIdUpdate" type="hidden" name="medicineId" class="w-100" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closePopup('updateMedicineModal')">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Delete Semester -->
+<div class="modal fade" id="deleteMedicineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-page-handler="Delete" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Semester</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" onclick="closePopup('deleteMedicineModal')"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="deleteMedicineid" type="hidden" name="medicineId" />
+                    <p> Do you want Delete this Medicine ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closePopup('deleteMedicineModal')">Cancle</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    $('#table').DataTable({
+        "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
+    });
+
+    function openPopup(medicineName, categoryId, medicineQuantity, medicineUnit, medicineDescription, medicineId) {
+        var inputName = document.getElementById("medicineNameUpdate");
+        inputName.value = medicineName;
+
+        const selectElement = document.getElementById('categoryUpdate');
+        const selectedOption = selectElement.querySelector(`option[value="${categoryId}"]`);
+        if (selectedOption) {
+            selectedOption.selected = true;
+        }
+
+        var inputMedicineQuantity = document.getElementById("medicineQuantityUpdate");
+        inputMedicineQuantity.value = medicineQuantity;
+
+        var inputMedicineUnit = document.getElementById("medicineUnitUpdate");
+        inputMedicineUnit.value = medicineUnit;
+
+        var inputMedicineDescription = document.getElementById("medicineDescriptionUpdate");
+        inputMedicineDescription.value = medicineDescription;
+
+        var id = document.getElementById("medicineIdUpdate");
+        id.value = medicineId;
 
 
+        $('#updateMedicineModal').modal('show');
+    }
+
+    function openPopupDelete(medicineId) {
+        var inputId = document.getElementById("deleteMedicineid");
+        inputId.value = medicineId;
+        $('#deleteMedicineModal').modal('show');
+    }
+</script>
