@@ -37,7 +37,7 @@ app.UseStaticFiles();
 app.UseSession();
 
 // using middleware
-//app.UseMiddleware<AuthorizeMiddleware>();
+app.UseMiddleware<AuthorizeMiddleware>();
 
 app.UseRouting();
 
