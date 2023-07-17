@@ -21,7 +21,7 @@ namespace SWD392_Project.Pages.Authentication
         {
         }
 
-        public IActionResult OnPost(string fullName, string email, string password, string phone)
+        public IActionResult OnPost(string fullName, string email, string password, string phone, int role)
         {
             User user = new User
             {
@@ -29,7 +29,7 @@ namespace SWD392_Project.Pages.Authentication
                 Email = email,
                 Password = password,
                 PhoneNumber = phone,
-                RoleId = 2,
+                RoleId = role,
                 IsDelete = false,
                 IsActive = false
             };

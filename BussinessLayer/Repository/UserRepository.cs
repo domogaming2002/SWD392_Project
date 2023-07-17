@@ -79,6 +79,14 @@ namespace SWD392_Project.BussinessLayer.Repository
             }
         }
 
-
+        public int ChangePassword(int userId, string newPassword)
+        {
+            manager = new UserManager(_context);
+            if (userId != null && !string.IsNullOrEmpty(newPassword))
+            {
+                return manager.ChangePassword(userId, newPassword);
+            }
+            return 0;
+        }
     }
 }
