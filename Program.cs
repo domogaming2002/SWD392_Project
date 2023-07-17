@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SWD392_Project.BussinessLayer.IRepository;
+using SWD392_Project.BussinessLayer.Middleware;
 using SWD392_Project.BussinessLayer.Repository;
 using SWD392_Project.Models;
 
