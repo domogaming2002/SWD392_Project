@@ -1,6 +1,8 @@
 ﻿@page
+@using SWD392_Project.Helper
 @model SWD392_Project.Pages.Drugs.AddDrugModel
 @{
+    Layout = "_LayoutAdmin";
 }
 
 <!DOCTYPE html>
@@ -8,15 +10,72 @@
 <html>
 <head>
     <title>Add new Drug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            display: block;
+            margin: 0 auto;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
     <form method="post">
         @*<input asp-for="Drug.DrugId" type="hidden" value="@Model.DrugId" />*@
         <div class="form-group">
             <label asp-for="Drug.DrugName">Drug name</label>
-            <input asp-for="Drug.DrugName" type="text" class="form-control" placeholder="name">
+            <input asp-for="Drug.DrugName" type="text" class="form-control" placeholder="Name">
         </div>
         <div class="form-group">
+            <label>Category</label>
             <select id="category" name="categoryId">
                 @foreach (var category in Model.Categories)
                 {
@@ -26,19 +85,19 @@
         </div>
         <div class="form-group">
             <label asp-for="Drug.Quantity">Quantity</label>
-            <input asp-for="Drug.Quantity" class="form-control" placeholder="quantity">
+            <input asp-for="Drug.Quantity" class="form-control" placeholder="Quantity">
         </div>
         <div class="form-group">
             <label asp-for="Drug.Price">Price</label>
-            <input asp-for="Drug.Price" class="form-control" placeholder="price">
+            <input asp-for="Drug.Price" class="form-control" placeholder="Price">
         </div>
         <div class="form-group">
             <label asp-for="Drug.Unit">Unit</label>
-            <input asp-for="Drug.Unit" class="form-control" placeholder="unit">
+            <input asp-for="Drug.Unit" class="form-control" placeholder="Unit">
         </div>
         <div class="form-group">
             <label asp-for="Drug.Description">Description</label>
-            <input asp-for="Drug.Description" class="form-control" placeholder="description">
+            <input asp-for="Drug.Description" class="form-control" placeholder="Description">
         </div>
 
         <button type="submit" class="btn btn-primary" style="width: 150px"> Add</button>

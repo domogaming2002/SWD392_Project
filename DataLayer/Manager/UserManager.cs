@@ -9,7 +9,7 @@ namespace SWD392_Project.DataLayer.Manager
         { _context = context; }
         public User GetUser(string email, string password)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Email == email && x.Password == password);
+            var user = _context.Users.FirstOrDefault(x => x.Email.Equals(email) && x.Password.Equals(password));
             if (user == null)
             {
                 return null;
@@ -33,6 +33,17 @@ namespace SWD392_Project.DataLayer.Manager
         {
             _context.Users.Add(user);
             return _context.SaveChanges();
+        }
+
+        public int ChangePassword(int userId, string newPassword)
+        {
+            var user = _context.Users.FirstOrDefault(o => o.Id == userId);
+            if (user != null)
+            {
+                user.Password = newPassword;
+                return _context.SaveChanges();
+            }
+            return 0;
         }
     }
 }

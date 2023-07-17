@@ -1,0 +1,55 @@
+﻿@page
+@model SWD392_Project.Pages.MedicineCategory.MedicineCategoriesModel
+@{
+    Layout = "_LayoutAdmin";
+}
+<!-- Button trigger modal create Medicine -->
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#createGradeModal">
+    Create Grade
+</button>
+
+<!-- Modal Create Medicine -->
+<div class="modal fade" id="createGradeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-page-handler="CreateMedicine" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Semester</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="medicineNameCategory">Medicine Category Name</label>
+                        <input type="text" name="medicineNameCategory" id="medicineNameCategory" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" name="description" id="description" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.categories)
+        {
+            <tr>
+                <td>@item.CategoryMedicineName</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -29,7 +29,7 @@ namespace SWD392_Project.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=localhost; \ndatabase = SWD_Project;uid=sa;pwd=123; Trusted_Connection=SSPI;Encrypt=false;TrustServerCertificate=true");
+                optionsBuilder.UseSqlServer("server=DANGNGOCLAN; database = SWD_Project;uid=sa;pwd=dangngoclan2002; Trusted_Connection=SSPI;Encrypt=false;TrustServerCertificate=true");
             }
         }
 
@@ -170,7 +170,8 @@ namespace SWD392_Project.Models
                 entity.Property(e => e.CreatedBy).HasColumnName("created_by");
 
                 entity.Property(e => e.Description)
-                    .HasColumnType("datetime")
+                    .HasMaxLength(8000)
+                    .IsUnicode(false)
                     .HasColumnName("description");
 
                 entity.Property(e => e.IsDelete).HasColumnName("isDelete");

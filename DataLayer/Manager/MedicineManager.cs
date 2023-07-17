@@ -87,5 +87,12 @@ namespace SWD392_Project.DataLayer.Manager
             return _context.Medicines.Include(m => m.CategoryMedicine).Include(m => m.CreatedByNavigation)
                 .Where(m => m.CategoryMedicineId == cateId && m.IsDelete == false).ToList();
         }
+        public List<Medicine> GetRunOutMedicine()
+        {
+            List<Medicine> runOutMedicines = _context.Medicines
+                                                    .Include(o => o.CategoryMedicine)
+                                                    .Where(o => o.Quantity <= 15).ToList();
+            return runOutMedicines;
+        }
     }
 }

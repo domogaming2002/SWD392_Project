@@ -11,5 +11,6 @@ namespace SWD392_Project.BussinessLayer.IRepository
         Boolean Update(Medicine medicine);
         List<Medicine> GetListMedicineByName(string medicineName);
         List<Medicine> GetListMedicineByCategoryId(int cateId);
+        List<Medicine> GetRunOutMedicine();
     }
 }
